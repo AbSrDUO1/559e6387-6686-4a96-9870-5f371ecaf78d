@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     title: "Coffee Haven - The Best Brews in Town",
     description: "Discover the rich flavors and aromatic experiences at Coffee Haven. Join us for a delightful coffee adventure.",
     siteName: "Coffee Haven"
-  }
+  },
 };
 
 export default function RootLayout({
@@ -107,8 +107,6 @@ export default function RootLayout({
 
   if (window.__webildEditorInitialized) return;
   window.__webildEditorInitialized = true;
-
-  console.log('[Webild Visual Editor] Initializing...');
 
   let isActive = false;
   let hoveredElement = null;
@@ -761,15 +759,12 @@ export default function RootLayout({
     if (e.data.type === 'webild-activate-editor') {
       if (!isActive) {
         isActive = true;
-        console.log('[Webild Visual Editor] Activated');
         window.parent.postMessage({ type: 'webild-editor-activated' }, '*');
       }
       return;
     }
 
     if (e.data.type === 'webild-deactivate-editor') {
-      console.log('[Webild Visual Editor] Deactivation requested from:', e.origin, 'Data:', e.data);
-
       if (isActive) {
         isActive = false;
 
@@ -786,8 +781,6 @@ export default function RootLayout({
         removeHoverOverlay();
         removeElementTypeLabel();
         removeSelectedCategoryLabel();
-
-        console.log('[Webild Visual Editor] Deactivated');
         window.parent.postMessage({ type: 'webild-editor-deactivated' }, '*');
       }
       return;
@@ -890,10 +883,6 @@ export default function RootLayout({
             }
           }
 
-          console.log('[Image Replace] Original oldValue:', oldValue);
-          console.log('[Image Replace] Clean oldValue:', cleanOldValue);
-          console.log('[Image Replace] New value:', newSrc);
-
           const change = {
             type: 'replaceImage',
             selector: selector,
@@ -972,7 +961,6 @@ export default function RootLayout({
   };
   
   window.parent.postMessage({ type: 'webild-editor-ready' }, '*');
-  console.log('[Webild Visual Editor] Ready and waiting for activation');
 })();
 `
           }}
